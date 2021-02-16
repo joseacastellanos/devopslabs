@@ -9,6 +9,11 @@ master.local
 worker01.local
 worker02.local
 
+[kubernetes]
+master.local
+worker01.local
+worker02.local
+
 [nfs]
 nfs.local
 
