@@ -6,7 +6,7 @@
 - name: instalar chrony
   dnf:
     name: chrony
-    state: lastest
+    state: latest
   become: yes
 
 - name: habilitar e iniciar chronyd
@@ -25,17 +25,17 @@
 - name: instalar paquete nfs-utils
   dnf:
     name: nfs-utils
-    state: lastest
+    state: latest
   become: yes
 
 - name: instalar paquete nfs4-acl-tools
   dnf:
     name: nfs4-acl-tools
-    state: lastest
+    state: latest
   become: yes
 
 - name: instalar paquete wget
   dnf:
     name: wget
-    state: lastest
+    state: latest
   become: yes
