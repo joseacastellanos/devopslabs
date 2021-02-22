@@ -1,7 +1,7 @@
 ---
 
 - name: tareas de configuración previas a la instalación de Kubernetes
-- hosts: all
+  hosts: all
   gather_facts: false
   roles:
     - { role: pre-deployment, become: yes }
