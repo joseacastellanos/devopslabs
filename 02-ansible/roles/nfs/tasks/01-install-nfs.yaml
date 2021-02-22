@@ -21,7 +21,7 @@
   become: yes
 
 - name: crear directorio /srv/nfs
-  command: mkdir /srv/nfs
+  command: mkdir -p /srv/nfs
 
 - name: crear fichero /etc/exports
   command: cp -r exports /etc/exports
