@@ -5,7 +5,7 @@
 
 - name: instalar chrony
   dnf:
-    name: chronyd
+    name: chrony
     state: latest
   become: yes
 
