@@ -1,0 +1,7 @@
+---
+
+- name: instalación del servidor NFS
+  hosts: kubernetes
+  gather_facts: false
+  roles:
+    - { role: master-workers, become: yes }
