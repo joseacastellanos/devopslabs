@@ -22,9 +22,11 @@
 
 - name: crear directorio /srv/nfs
   command: mkdir -p /srv/nfs
+  become: yes
 
 - name: crear fichero /etc/exports
-  command: cp -r exports /etc/exports
+  command: cp -r exports /etc/
+  become: yes
 
 - name: configurar los exports exportfs -r
   command: exportfs -r
