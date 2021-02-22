@@ -1,4 +1,4 @@
 ---
 
 - name: tareas previas de configuración
-- command: dnf update -y  
+  command: dnf update -y  
