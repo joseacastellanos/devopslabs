@@ -30,7 +30,7 @@
   copy:
     dest: "/etc/exports"
     content: |
-      /srv/nfs 192.168.1.155
+      /srv/nfs 192.168.1.150
       /srv/nfs 192.168.1.151
       /srv/nfs 192.168.1.152
   become: yes
@@ -40,3 +40,24 @@
 
 - name: configurar los exports exportfs -s
   command: exportfs -s
+
+- name: abrir puertos para que el servicio nfs sea accesible 
+  firewalld:
+    service: nfs
+    permanent: true
+    state: enabled
+
+- name: abrir puertos para que el servicio rpc-bind sea accesible
+  firewalld:
+    service: rpc-bind
+    permanent: true
+    state: enabled
+
+- name: abrir puertos para que el servicio mountd sea accesible
+  firewalld:
+    service: mountd
+    permanent: true
+    state: enabled
+
+- name: reiniciar firewall
+  command: firewall-cmd --reload
