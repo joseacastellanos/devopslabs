@@ -1,0 +1,33 @@
+---
+
+- name: instalar paquete nfs-utils
+  dnf:
+    name: nfs-utils
+    state: latest
+  become: yes
+
+- name: instalar paquete net-tools
+  dnf:
+    name: net-tools
+    state: latest
+  become: yes
+
+- name: habilitar e iniciar nfs-server
+  systemd: 
+    name: nfs-server
+    state: started
+    enabled: yes
+    masked: no
+  become: yes
+
+- name: crear directorio /srv/nfs
+  command: mkdir /srv/nfs
+
+- name: crear fichero /etc/exports
+  command: cp -r exports /etc/exports
+
+- name: configurar los exports exportfs -r
+  command: exportfs -r
+
+- name: configurar los exports exportfs -s
+  command: exportfs -s
