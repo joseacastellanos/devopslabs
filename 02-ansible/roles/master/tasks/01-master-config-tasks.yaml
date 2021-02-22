@@ -81,5 +81,5 @@
   become: true
 
 - name: autorizar al usuario root a acceder al cluster (cambiar el propietario del fichero /root/.kube/config)
-  command: chown $(id -u):$(id -g) /root/.kube/config
+  command: chown "$(id -u):$(id -g)" /root/.kube/config
   become: true
