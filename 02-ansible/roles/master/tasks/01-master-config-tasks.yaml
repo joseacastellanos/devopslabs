@@ -68,8 +68,9 @@
   command: firewall-cmd --reload
 
 - name: se instala el plugin CNI de kubernetes y definimos la red de los PODs
-  command: kubeadm init --pod-network-cidr 192.169.0.0/16
+  command: kubeadm init --pod-network-cidr 192.169.0.0/16 --apiserver-advertise-address 192.168.1.150
   register: kubeadm_init
+  become: true
 
 - name: autorizar al usuario root a acceder al cluster (crear directorio /root/.kube)
   command: mkdir -p /root/.kube
