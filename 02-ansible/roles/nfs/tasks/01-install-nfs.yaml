@@ -21,11 +21,18 @@
   become: yes
 
 - name: crear directorio /srv/nfs
-  command: mkdir -p /srv/nfs
+  file: 
+    path: /srv/nfs
+    state: directory
   become: yes
 
 - name: crear fichero /etc/exports
-  command: cp -r exports /etc/
+  copy:
+    dest: "/etc/exports"
+    content: |
+      /srv/nfs 192.168.1.150
+      /srv/nfs 192.168.1.151
+      /srv/nfs 192.168.1.152
   become: yes
 
 - name: configurar los exports exportfs -r
