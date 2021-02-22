@@ -1,0 +1,69 @@
+---
+
+- name: actualizar fichero /etc/hosts para resolver DNS
+  copy:
+    dest: "/etc/hosts"
+    content: |
+      127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+      ::1 localhost localhost.localdomain localhost6 localhost6.localdomain6
+      192.168.1.150 master master.local
+      192.168.1.151 worker01 worker01.local
+      192.168.1.152 worker02 worker02.local
+      192.168.1.140 nfs nfs.local      
+  become: yes
+
+- name: activa transparect masquerading (modprobe)
+  command: modprobe br_netfilter
+
+- name: abrir puertos para que el servicio masquerade 
+  firewalld:
+    masquerade: yes
+    permanent: true
+    state: enabled
+
+- name: reiniciar firewall
+  command: firewall-cmd --reload
+
+- name: permitir que kubernetes maneje correctamente el tráfico del cortafuegos
+  copy:
+    dest: "/etc/sysctl.d/k8s.conf"
+    content: |
+      net.bridge.bridge-nf-call-ip6tables = 1
+      net.bridge.bridge-nf-call-iptables = 1
+  become: yes
+
+- name: aplicando cambios en /etc/sysctl.d/k8s.conf
+  command: sysctl --system
+
+- name: Desactivar swap para mejorar rendimiento de la máquina
+  command: swapoff -a
+
+- name: Eliminar la línea de swap del fichero /etc/fstab
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    state: absent
+    regexp: '^%swap'
+
+- name: configurando el repositorio de docker
+  command: "/usr/bin/dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo"
+  become: yes
+
+- name: instalando docker-ce
+  dnf:
+    name: "docker-ce-19.03.14-3.el8"
+    state: present
+  become: yes
+
+- name: instalando containerd.io
+  dnf:
+    name: "containerd.io"
+    state: present
+  become: yes
+
+- name: configurando el arranque de docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+    masked: no
+  become: yes
