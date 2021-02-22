@@ -77,7 +77,7 @@
   become: true
 
 - name: autorizar al usuario root a acceder al cluster (copiar fichero /etc/kubernetes/admin.conf a /root/.kube/config)
-  command: cp /etc/kubernetes/admin.conf /root/.kube/config
+  command: cp -f /etc/kubernetes/admin.conf /root/.kube/config
   become: true
 
 - name: autorizar al usuario root a acceder al cluster (cambiar el propietario del fichero /root/.kube/config)
