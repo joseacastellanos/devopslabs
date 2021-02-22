@@ -1,0 +1,84 @@
+---
+
+- name: abrir puerto 6443/tcp (Kubernetes API Server)
+  firewalld:
+    port: 6443/tcp
+    permanent: true
+    state: enabled
+
+- name: abrir puerto 2379-2380/tcp (etcd server client API)
+  firewalld:
+    port: 2379-2380/tcp
+    permanent: true
+    state: enabled
+
+- name: abrir puerto 10250/tcp (Kubelet API)
+  firewalld:
+    port: 10250/tcp
+    permanent: true
+    state: enabled
+
+- name: abrir puerto 10251/tcp (kube-scheduler)
+  firewalld:
+    port: 10251/tcp
+    permanent: true
+    state: enabled
+
+- name: abrir puerto 10252/tcp (kube-controller-manager)
+  firewalld:
+    port: 10252/tcp
+    permanent: true
+    state: enabled
+
+- name: abrir puerto 10255/tcp (Statistics)
+  firewalld:
+    port: 10255/tcp
+    permanent: true
+    state: enabled
+
+- name: reiniciar firewall
+  command: firewall-cmd --reload
+
+- name: configurar kubeadm (descarga de imágenes)
+  command: kubeadm config images pull
+
+- name: abrir regla para permitir acceso desde Worker01 al master
+  firewalld:
+    rich_rule: rule family=ipv4 source address=192.168.1.151/32 accept
+    permanent: true
+    state: enabled
+
+- name: abrir regla para permitir acceso desde Worker02 al master
+  firewalld:
+    rich_rule: rule family=ipv4 source address=192.168.1.152/32 accept
+    permanent: true
+    state: enabled
+
+- name: reiniciar firewall
+  command: firewall-cmd --reload
+
+- name: abrir regla para permitir acceso de los contenedores a localhost
+  firewalld:
+    rich_rule: rule family=rule family=ipv4 source address=172.17.0.0/16 accept
+    zone: public
+    permanent: true
+    state: enabled
+
+- name: reiniciar firewall
+  command: firewall-cmd --reload
+
+- name: se instala el plugin CNI de kubernetes y definimos la red de los PODs
+  command: kubeadm init --pod-network-cidr 192.169.0.0/16
+  register: kubeadm_init
+
+- name: autorizar al usuario root a acceder al cluster (crear directorio /root/.kube)
+  command: mkdir -p /root/.kube
+  become: true
+
+- name: autorizar al usuario root a acceder al cluster (copiar fichero /etc/kubernetes/admin.conf a /root/.kube/config)
+  command: cp -i /etc/kubernetes/admin.conf /root/.kube/config
+  become: true
+
+- name: autorizar al usuario root a acceder al cluster (cambiar el propietario del fichero /root/.kube/config)
+  command: chown $(id -u):$(id -g) /root/.kube/config
+  become: true

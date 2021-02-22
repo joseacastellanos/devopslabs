@@ -1,0 +1,7 @@
+---
+
+- name: instalación del servidor NFS
+  hosts: master
+  gather_facts: false
+  roles:
+    - { role: master, become: yes }
