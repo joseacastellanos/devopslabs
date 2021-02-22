@@ -1,4 +1,41 @@
 ---
 
-- name: tareas previas de configuración
-  command: dnf update -y  
+- name: establecer zona horaria
+  command: timedatectl set-timezone Europe/Madrid
+
+- name: instalar chrony
+  dnf:
+    name: chrony
+    state: lastest
+  become: yes
+
+- name: habilitar e iniciar chronyd
+  systemd: 
+    name: systemctl
+    state: started
+    enabled: yes
+  become: yes
+
+- name: habilitar ntp
+  command: timedatectl set-ntp true
+
+- name: desactivar SELinux
+  command: sed -i s/=enforcing/=disabled/g /etc/selinux/config
+
+- name: instalar paquete nfs-utils
+  dnf:
+    name: nfs-utils
+    state: lastest
+  become: yes
+
+- name: instalar paquete nfs4-acl-tools
+  dnf:
+    name: nfs4-acl-tools
+    state: lastest
+  become: yes
+
+- name: instalar paquete wget
+  dnf:
+    name: wget
+    state: lastest
+  become: yes
