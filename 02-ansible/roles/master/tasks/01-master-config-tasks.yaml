@@ -59,7 +59,7 @@
 
 - name: abrir regla para permitir acceso de los contenedores a localhost
   firewalld:
-    rich_rule: rule family=rule family=ipv4 source address=172.17.0.0/16 accept
+    rich_rule: rule family=ipv4 source address=172.17.0.0/16 accept
     zone: public
     permanent: true
     state: enabled
