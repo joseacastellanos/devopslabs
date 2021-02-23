@@ -88,7 +88,7 @@
   become: true
 
 - name: se borra el operador de Tigera (si existe)
-  command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+  command: kubectl delete -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
   become: true
   ignore_errors: yes
 
