@@ -83,6 +83,24 @@
 - name: autorizar al usuario root a acceder al cluster (cambiar el propietario del fichero /root/.kube/config)
   file: 
     path: /root/.kube/config
-    owner: '0'
-    group: '0'
+    owner: root
+    group: root
+  become: true
+
+- name: se instala el operador de Tigera
+  command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+  become: true
+
+- name: se descarga el fichero de definición para la instalación de Calico
+  command: wget https://docs.projectcalico.org/manifests/custom-resources.yaml
+  become: true
+
+- name: cambiamos el cidr para que coincida con el de nuestra red de PODs
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^cidr:'
+    line: '      cidr: 192.169.0.0/16'
+
+- name: se instala Calico
+  command: kubectl apply -f custom-resources.yaml
   become: true
