@@ -99,6 +99,7 @@
   ansible.builtin.lineinfile:
     path: /root/custom-resources.yaml
     regexp: '^%cidr:'
+    state: present
     line: '      cidr: 192.169.0.1/16'
 
 - name: se instala Calico
