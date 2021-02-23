@@ -2,6 +2,9 @@
 
 - name: instalación del servidor NFS
   hosts: workers
+  vars_files:
+    - "group_vars/hosts.yaml"
+    - "group_vars/kubeadm-join-command.yaml"
   gather_facts: false
   roles:
     - { role: workers, become: yes }
