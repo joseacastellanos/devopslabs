@@ -6,10 +6,10 @@
     content: |
       127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
       ::1 localhost localhost.localdomain localhost6 localhost6.localdomain6
-      192.168.1.150 master master.local
-      192.168.1.151 worker01 worker01.local
-      192.168.1.152 worker02 worker02.local
-      192.168.1.140 nfs nfs.local      
+      {{ ip_master }} master master.local
+      {{ ip_worker01 }} worker01 worker01.local
+      {{ ip_worker02 }} worker02 worker02.local
+      {{ ip_nfs }} nfs nfs.local      
   become: yes
 
 - name: activa transparect masquerading (modprobe)

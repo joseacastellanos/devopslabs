@@ -30,9 +30,9 @@
   copy:
     dest: "/etc/exports"
     content: |
-      /srv/nfs 192.168.1.150
-      /srv/nfs 192.168.1.151
-      /srv/nfs 192.168.1.152
+      /srv/nfs {{ ip_master }}
+      /srv/nfs {{ ip_worker01 }}
+      /srv/nfs {{ ip_worker02 }}
   become: yes
 
 - name: configurar los exports exportfs -r

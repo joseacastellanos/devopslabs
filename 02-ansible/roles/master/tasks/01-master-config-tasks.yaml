@@ -44,13 +44,13 @@
 
 - name: abrir regla para permitir acceso desde Worker01 al master
   firewalld:
-    rich_rule: rule family=ipv4 source address=192.168.1.151/32 accept
+    rich_rule: rule family=ipv4 source address={{ ip_worker01 }}/32 accept
     permanent: true
     state: enabled
 
 - name: abrir regla para permitir acceso desde Worker02 al master
   firewalld:
-    rich_rule: rule family=ipv4 source address=192.168.1.152/32 accept
+    rich_rule: rule family=ipv4 source address={{ ip_worker02 }}/32 accept
     permanent: true
     state: enabled
 
@@ -68,7 +68,7 @@
   command: firewall-cmd --reload
 
 - name: se instala el plugin CNI de kubernetes y definimos la red de los PODs
-  command: kubeadm init --pod-network-cidr 192.169.0.0/16 --apiserver-advertise-address 192.168.1.150
+  command: kubeadm init --pod-network-cidr 192.169.0.0/16 --apiserver-advertise-address {{ ip_master }}
   register: kubeadm_init
   become: true
 

@@ -2,6 +2,8 @@
 
 - name: instalación del servidor NFS
   hosts: master
+  vars_files:
+    - "group_vars/hosts.yaml"
   gather_facts: false
   roles:
     - { role: master, become: yes }
