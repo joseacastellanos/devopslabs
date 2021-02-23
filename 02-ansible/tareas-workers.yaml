@@ -1,7 +1,7 @@
 ---
 
 - name: instalación del servidor NFS
-  hosts: master
+  hosts: workers
   gather_facts: false
   roles:
     - { role: workers, become: yes }
