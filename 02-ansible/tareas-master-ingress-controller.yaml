@@ -3,5 +3,12 @@
 - name: instalación del servidor NFS
   hosts: master
   gather_facts: false
+  vars_prompt:
+
+    # pregunta por teclado la contraseña del usuario kubeadmin y la almacena en la variable password
+    - name: password
+      prompt: Introduce una contraseña para el usuario kubeadmin
+      private: yes
+
   roles:
     - { role: master-ingress-controller, become: yes }
