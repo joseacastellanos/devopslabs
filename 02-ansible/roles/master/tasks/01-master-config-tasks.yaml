@@ -83,6 +83,6 @@
 - name: autorizar al usuario root a acceder al cluster (cambiar el propietario del fichero /root/.kube/config)
   file: 
     path: /root/.kube/config
-    owner: 0
-    group: 0
+    owner: '0'
+    group: '0'
   become: true
