@@ -99,7 +99,7 @@
   ansible.builtin.lineinfile:
     path: /etc/hosts
     regexp: '^cidr:'
-    line: '      cidr: 192.169.0.0/16'
+    line: '      cidr: 192.169.0.1/16'
 
 - name: se instala Calico
   command: kubectl apply -f custom-resources.yaml
