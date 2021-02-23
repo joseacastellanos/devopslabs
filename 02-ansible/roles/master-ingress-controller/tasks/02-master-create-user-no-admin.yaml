@@ -7,7 +7,6 @@
 - name: establecer contraseña del usuario kubeadmin
   user: 
     name: kubeadmin
-    update_password: always
     password: {{ password }}
   become: true
 
