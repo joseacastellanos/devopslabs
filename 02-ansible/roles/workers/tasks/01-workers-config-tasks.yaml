@@ -17,6 +17,10 @@
 - name: reiniciar firewall
   command: firewall-cmd --reload
 
+- name: se resetea kubernetes (en caso de que ya se haya instalado)
+  command: yes 'y' | kubeadm reset
+  become: yes
+  
 - name: unir worker al cluster (kubeadm join)
   command: kubeadm join {{ ip_master }}:6443 --token {{ token }} --discovery-token-ca-cert-hash sha256:{{ hash }}
   become: true
