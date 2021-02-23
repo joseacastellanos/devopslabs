@@ -18,5 +18,5 @@
   command: firewall-cmd --reload
 
 - name: unir worker al cluster (kubeadm join)
-  command: kubeadm join {{ ip-master }}:6443 --token {{ token }} --discovery-token-ca-cert-hash sha256:{{ hash }}
+  command: kubeadm join {{ ip_master }}:6443 --token {{ token }} --discovery-token-ca-cert-hash sha256:{{ hash }}
   become: true
