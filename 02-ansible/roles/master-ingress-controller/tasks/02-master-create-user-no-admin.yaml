@@ -21,6 +21,7 @@
   copy:
     src: "/etc/kubernetes/admin.conf"
     dest: "/home/kubeadmin/.kube/config"
+    remote_src: yes
   become: yes
 
 - name: cambiar el propietario /home/kubeadmin/.kube/config
