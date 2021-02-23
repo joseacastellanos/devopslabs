@@ -1,0 +1,34 @@
+---
+
+- name: crear usuario kubeadmin
+  command: useradd -md /home/kubeadmin kubeadmin
+  become: true
+
+- name: establecer contraseña del usuario kubeadmin
+  command: passwd kubeadmin
+  become: true
+
+- name: crear directorio /home/kubeadmin/.kube
+  file: 
+    path: /home/kubeadmin/.kube
+    state: directory
+  become: yes
+
+- name: copiar el fichero /etc/kubernetes/admin.conf a /home/kubeadmin/.kube/config
+  copy:
+    src: "/etc/kubernetes/admin.conf"
+    dest: "/home/kubeadmin/.kube/config"
+  become: yes
+
+- name: cambiar el propietario /home/kubeadmin/.kube/config
+  file: 
+    path: /home/kubeadmin/.kube/config
+    owner: kubeadmin
+  become: true
+
+- name: se actualiza el fichero /etc/sudoers.d/kubeadmin
+  copy:
+    dest: "/etc/sudoers.d/kubeadmin"
+    content: |
+      ALL            ALL = (ALL) NOPASSWD: ALL
+  become: yes
