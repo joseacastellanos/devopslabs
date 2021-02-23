@@ -1,0 +1,22 @@
+---
+
+- name: abrir puerto 10250/tcp (Kubelet API)
+  firewalld:
+    port: 10250/tcp
+    zone: public
+    permanent: true
+    state: enabled
+
+- name: abrir puerto 30000-32767/tcp 
+  firewalld:
+    port: 30000-32767/tcp
+    zone: public
+    permanent: true
+    state: enabled
+    
+- name: reiniciar firewall
+  command: firewall-cmd --reload
+
+- name: unir worker al cluster (kubeadm join)
+  command: kubeadm join {{ ip-master }}:6443 --token {{ token }} --discovery-token-ca-cert-hash sha256:{{ hash }}
+  become: true
