@@ -98,9 +98,9 @@
 - name: cambiamos el cidr para que coincida con el de nuestra red de PODs
   ansible.builtin.lineinfile:
     path: /root/custom-resources.yaml
-    regexp: '^%cidr:'
-    state: present
+    regexp: '^(.*)cidr(.*)$'
     line: '      cidr: 192.169.0.1/16'
+    backrefs: yes
 
 - name: se instala Calico
   command: kubectl apply -f custom-resources.yaml
