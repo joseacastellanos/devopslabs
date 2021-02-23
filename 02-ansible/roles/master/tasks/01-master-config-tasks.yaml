@@ -97,7 +97,7 @@
 
 - name: cambiamos el cidr para que coincida con el de nuestra red de PODs
   ansible.builtin.lineinfile:
-    path: /etc/hosts
+    path: /root/custom-resources.yaml
     regexp: '^%cidr:'
     line: '      cidr: 192.169.0.1/16'
 
