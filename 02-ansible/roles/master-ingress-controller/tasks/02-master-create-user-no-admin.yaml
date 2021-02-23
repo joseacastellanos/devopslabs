@@ -5,7 +5,10 @@
   become: true
 
 - name: establecer contraseña del usuario kubeadmin
-  command: echo -e "{{ password }}\n{{ password }} | passwd kubeadmin
+  user: 
+    name: kubeadmin
+    update_password: always
+    password: {{ password }}
   become: true
 
 - name: crear directorio /home/kubeadmin/.kube
