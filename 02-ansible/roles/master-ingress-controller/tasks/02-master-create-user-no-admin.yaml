@@ -8,7 +8,7 @@
   user: 
     name: kubeadmin
     update_password: always
-    password: {{ password|password_hash('sha512') }}
+    password: "{{ password }}"
   become: true
 
 - name: crear directorio /home/kubeadmin/.kube
