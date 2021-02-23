@@ -110,3 +110,7 @@
     enabled: yes
     masked: no
   become: yes
+
+- name: se resetea kubernetes (en caso de que ya se haya instalado)
+  command: yes 'y' | kubeadm reset
+  become: yes

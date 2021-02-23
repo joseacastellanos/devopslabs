@@ -87,6 +87,11 @@
     group: root
   become: true
 
+- name: se borra el operador de Tigera (si existe)
+  command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+  become: true
+  ignore_errors: yes
+
 - name: se instala el operador de Tigera
   command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
   become: true
@@ -107,3 +112,9 @@
 - name: se instala Calico
   command: kubectl apply -f /root/custom-resources.yaml
   become: true
+
+- name: eliminamos los nodos si estuvieran conectado previamente (worker01)
+  command: kubectl delete node worker01.local
+
+- name: eliminamos los nodos si estuvieran conectado previamente (worker02)
+  command: kubectl delete node worker02.local
