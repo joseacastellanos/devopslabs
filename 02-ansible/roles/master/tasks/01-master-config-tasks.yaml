@@ -81,5 +81,8 @@
   become: true
 
 - name: autorizar al usuario root a acceder al cluster (cambiar el propietario del fichero /root/.kube/config)
-  command: chown "$(id -u):$(id -g)" /root/.kube/config
+  file: 
+    path: /root/.kube/config
+    owner: "{{ ansible_effective_user_id }}"
+    group: "{{ ansible_effective_group_id }}"
   become: true
