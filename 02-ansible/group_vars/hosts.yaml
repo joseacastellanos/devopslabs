@@ -9,6 +9,6 @@ hostname_worker01: worker01
 hostname_worker02: worker02
 hostname_nfs: nfs
 hostname_domain_master: master.local
-hostname_domain_worker01: worker01
-hostname_domain_worker02: worker02
-hostname_domain_nfs: nfs
+hostname_domain_worker01: worker01.local
+hostname_domain_worker02: worker02.local
+hostname_domain_nfs: nfs.local
