@@ -67,10 +67,7 @@
 - name: reiniciar firewall
   command: firewall-cmd --reload
 
-- name: se resetea kubernetes (en caso de que ya se haya instalado)
-  command: yes 'y' | kubeadm reset
-  become: yes
-  
+# comentar esta tarea (en una segunda ejecución del playbook sobre el mismo entorno)
 - name: se instala el plugin CNI de kubernetes y definimos la red de los PODs
   command: kubeadm init --pod-network-cidr 192.169.0.0/16 --apiserver-advertise-address {{ ip_master }}
   register: kubeadm_init
@@ -119,6 +116,8 @@
 
 - name: eliminamos los nodos si estuvieran conectado previamente (worker01)
   command: kubectl delete node worker01.local
+  ignore_errors: yes
 
 - name: eliminamos los nodos si estuvieran conectado previamente (worker02)
   command: kubectl delete node worker02.local
+  ignore_errors: yes
