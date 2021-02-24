@@ -1,5 +1,17 @@
 ---
 
+- name: actualizar fichero /etc/hosts para resolver DNS
+  copy:
+    dest: "/etc/hosts"
+    content: |
+      127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+      ::1 localhost localhost.localdomain localhost6 localhost6.localdomain6
+      {{ ip_master }} {{ hostname_master }} {{ hostname_domain_master }}
+      {{ ip_worker01 }} {{ hostname_worker01 }} {{ hostname_domain_worker01 }}
+      {{ ip_worker02 }} {{ hostname_worker02 }} {{ hostname_domain_worker02 }}
+      {{ ip_nfs }} {{ hostname_nfs }} {{ hostname_domain_nfs }}      
+  become: yes
+  
 - name: establecer zona horaria
   command: timedatectl set-timezone Europe/Madrid
 
