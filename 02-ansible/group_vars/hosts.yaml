@@ -4,3 +4,11 @@ ip_master: 192.168.1.150
 ip_worker01: 192.168.1.151
 ip_worker02: 192.168.1.152
 ip_nfs: 192.168.1.140
+hostname_master: master
+hostname_worker01: worker01
+hostname_worker02: worker02
+hostname_nfs: nfs
+hostname_domain_master: master.local
+hostname_domain_worker01: worker01
+hostname_domain_worker02: worker02
+hostname_domain_nfs: nfs

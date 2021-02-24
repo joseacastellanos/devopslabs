@@ -59,7 +59,7 @@
 
 - name: abrir regla para permitir acceso de los contenedores a localhost
   firewalld:
-    rich_rule: rule family=ipv4 source address=172.17.0.0/16 accept
+    rich_rule: rule family=ipv4 source address={{ docker_network }}/16 accept
     zone: public
     permanent: true
     state: enabled
@@ -69,7 +69,7 @@
 
 # comentar esta tarea (en una segunda ejecución del playbook sobre el mismo entorno)
 - name: se instala el plugin CNI de kubernetes y definimos la red de los PODs
-  command: kubeadm init --pod-network-cidr 192.169.0.0/16 --apiserver-advertise-address {{ ip_master }}
+  command: kubeadm init --pod-network-cidr {{ pods_network }}/16 --apiserver-advertise-address {{ ip_master }}
   register: kubeadm_init
   become: true
 
@@ -103,7 +103,7 @@
   ansible.builtin.lineinfile:
     path: /root/custom-resources.yaml
     regexp: '^(.*)cidr(.*)$'
-    line: '      cidr: 192.169.0.0/16'
+    line: '      cidr: {{ pods_network }}/16'
     backrefs: yes
 
 - name: se instala Calico

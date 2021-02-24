@@ -1,0 +1,4 @@
+---
+
+pods_network: 192.169.0.0
+docker_network: 172.17.0.0

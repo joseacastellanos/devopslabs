@@ -4,6 +4,7 @@
   hosts: master
   vars_files:
     - "group_vars/hosts.yaml"
+    - "group_vars/network.yaml"
   gather_facts: false
   roles:
     - { role: master, become: yes }
