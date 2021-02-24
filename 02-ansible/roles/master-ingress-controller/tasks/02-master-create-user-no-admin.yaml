@@ -1,10 +1,5 @@
 ---
 
-- name: borrar usuario usuario kubeadmin (si existe)
-  command: userdel -r kubeadmin
-  become: true
-  ignore_errors: yes
-
 - name: crear usuario kubeadmin
   command: useradd -md /home/kubeadmin kubeadmin
   become: true
