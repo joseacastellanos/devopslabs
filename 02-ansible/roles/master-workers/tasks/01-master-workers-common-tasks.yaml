@@ -79,14 +79,14 @@
 
 - name: instalando kubeadm
   dnf:
-    name: "kubelet"
+    name: "kubeadm"
     state: present
     disable_excludes: "kubernetes"
   become: yes
 
 - name: instalando kubectl
   dnf:
-    name: "kubelet"
+    name: "kubectl"
     state: present
     disable_excludes: "kubernetes"
   become: yes
