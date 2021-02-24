@@ -30,7 +30,7 @@
   ansible.builtin.lineinfile:
     path: /etc/fstab
     state: absent
-    regexp: '^%swap'
+    regexp: '^(.*)swap(.*)$'
 
 - name: configurando el repositorio de docker
   command: "/usr/bin/dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo"
