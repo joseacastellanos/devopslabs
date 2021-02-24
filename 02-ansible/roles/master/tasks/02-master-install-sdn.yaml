@@ -1,0 +1,23 @@
+---
+
+# comentar esta tarea (en una segunda ejecución del playbook sobre el mismo entorno)
+- name: se instala el operador de Tigera
+  command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+  become: true
+
+- name: se descarga el fichero de definición para la instalación de Calico
+  get_url: 
+    url: https://docs.projectcalico.org/manifests/custom-resources.yaml
+    dest: /root/custom-resources.yaml
+  become: true
+
+- name: cambiamos el cidr para que coincida con el de nuestra red de PODs
+  ansible.builtin.lineinfile:
+    path: /root/custom-resources.yaml
+    regexp: '^(.*)cidr(.*)$'
+    line: '      cidr: {{ pods_network }}/16'
+    backrefs: yes
+
+- name: se instala Calico
+  command: kubectl apply -f /root/custom-resources.yaml
+  become: true

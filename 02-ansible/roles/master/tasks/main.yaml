@@ -1,3 +1,4 @@
 ---
 
-- include_tasks: 01-master-config-tasks.yaml
+- include_tasks: 01-master-config-kubernetes.yaml
+- include_tasks: 02-master-install-sdn.yaml
