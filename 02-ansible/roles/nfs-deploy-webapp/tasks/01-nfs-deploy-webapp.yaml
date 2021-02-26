@@ -3,6 +3,6 @@
 #copiar index.php al directorio mapeado del volumen
 - name: copiar fichero index.php al directorio mapeado del volumen
   copy:
-    src: {{ target_dir }}/03-k8s/webapp-volumes/index.php
-    dest: /srv/nfs/index.php
+    src: "{{ target_dir }}/03-k8s/webapp-volumes/index.php"
+    dest: "/srv/nfs/index.php"
   become: yes
