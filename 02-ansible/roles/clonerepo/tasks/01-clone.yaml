@@ -1,5 +1,11 @@
 ---
 
+- name: instalar git
+  dnf:
+    name: "git"
+    state: present
+  become: yes
+
 - name: clona repositorio git privado
   git:
     repo: "https://github.com/{{ user }}/{{ private_repo_name }}.git"
