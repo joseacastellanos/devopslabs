@@ -1,0 +1,7 @@
+---
+
+private_repo_name: 'devopslabs'
+
+user: 'joseacastellanos'
+
+target_dir: '/tmp/git'

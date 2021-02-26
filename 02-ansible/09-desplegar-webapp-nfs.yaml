@@ -1,0 +1,9 @@
+---
+
+- name: despliegue de una aplicación web con volúmenes (servidor NFS)
+  hosts: nfs
+  vars_files:
+    - "group_vars/clonerepo.yaml"
+  gather_facts: false
+  roles:
+    - { role: nfs-deploy-webapp, become: yes }

@@ -1,0 +1,17 @@
+---
+
+- name: crear el namespace webapp-volumes
+  command: kubectl create namespace webapp-volumes
+  become: true
+
+- name: definir el persistent volume
+  command: kubectl apply -f {{ target_dir }}/{{ private_repo_name }}/03-k8s/webapp-volumes/nfs-pv.yaml
+  become: true
+
+- name: hacer el claim
+  command: kubectl apply -f {{ target_dir }}/{{ private_repo_name }}/03-k8s/webapp-volumes/nfs-pvc.yaml 
+  become: true
+
+- name: hacer el desployment
+  command: kubectl apply -f {{ target_dir }}/{{ private_repo_name }}/03-k8s/webapp-volumes/webapp-volumes.yaml 
+  become: true

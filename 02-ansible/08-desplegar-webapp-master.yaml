@@ -1,0 +1,9 @@
+---
+
+- name: despliegue de una aplicación web con volúmenes (servidor master)
+  hosts: master
+  vars_files:
+    - "group_vars/clonerepo.yaml"
+  gather_facts: false
+  roles:
+    - { role: master-deploy-webapp, become: yes }
