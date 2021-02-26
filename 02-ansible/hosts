@@ -1,19 +1,27 @@
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
-ansible_user=adminUsername
+#ansible_user=adminUsername
+ansible_user=ansible
 
 [master]
-master.azure
+#master.azure
+master.local
 
 [workers]
-worker01.azure
-worker02.azure
+#worker01.azure
+#worker02.azure
+worker01.local
+worker02.local
 
 [kubernetes]
-master.azure
-worker01.azure
-worker02.azure
+#master.azure
+#worker01.azure
+#worker02.azure
+master.local
+worker01.local
+worker02.local
 
 [nfs]
-nfs.azure
+#nfs.azure
+nfs.local
 
