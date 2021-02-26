@@ -2,5 +2,7 @@
 
 #copiar index.php al directorio mapeado del volumen
 - name: copiar fichero index.php al directorio mapeado del volumen
-  command: cp {{ target_dir }}/{{ private_repo_name }}/03-k8s/webapp-volumes/index.php /srv/nfs/index.php
-  become: true
+  copy:
+    src: {{ target_dir }}/03-k8s/webapp-volumes/index.php
+    dest: /srv/nfs/index.php
+  become: yes
