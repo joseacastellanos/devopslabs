@@ -39,5 +39,5 @@ jobs:
         app-name: 'az400lod11566895stordddd'
         slot-name: 'production'
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1abc74bbb9ee4a1fb0773add67108eb2 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_af4e5b234d5f4b65adbd505e33a7f7c9 }}
   
